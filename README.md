@@ -26,10 +26,11 @@ end
 Just use print as per usual.
 #### Example
 ```
-print("Printed from main.lua at the base level (no funciton)")
+print("Printed from main.lua at the base level (no function)")
 ```
 Outputs;
-10:50:27 °/main.lua:nil():215: Printed from main.lua at the base level (no funciton)
+10:50:27 °/main.lua:nil():215: Printed from main.lua at the base level (no function)
+
 Printed at 10:50 from main.lua - no funciton - line 215
 ```
 local function test ()
@@ -39,6 +40,7 @@ test()
 ```
 Outputs;
 ° 10:54:40 °/main.lua:test():250: Printed from main.lua inside function test()
+
 Printed at 10:54 from main.lua - funciton test - line 250
 
 ## Built With
