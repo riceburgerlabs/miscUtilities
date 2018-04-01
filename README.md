@@ -1,6 +1,8 @@
 # miscUtilities
 Random pieces of code that might be helpful to people
 
+ - newPrint - replaces the default print by giving more information.
+
 ## Getting Started
 
 These files are all stand alone.  Download the file/files you are interested in, place it in your project and require it.
@@ -23,5 +25,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 * Big thanks to the Corona community.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTM1ODQ3NjMzXX0=
+eyJoaXN0b3J5IjpbLTYyMzgwMTA0Nl19
 -->
