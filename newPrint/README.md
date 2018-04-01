@@ -49,7 +49,7 @@ test()
 
 ## Authors
 
-* 
+* Multiple sources on the Corona forums
 * **Rice Burger Labs** - [Rice Burger Labs](http://www.riceburgerlabs.com)
 
 ## License
@@ -59,5 +59,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 # Acknowledgments
 * Big thanks to the Corona community.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODk3MzIyMjcwXX0=
+eyJoaXN0b3J5IjpbMjE4Mzk4NTY2XX0=
 -->
