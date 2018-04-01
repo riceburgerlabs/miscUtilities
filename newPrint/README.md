@@ -53,10 +53,10 @@ test()
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE.md) file for details
 
 # Acknowledgments
 * Big thanks to the Corona community.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQyMTEzMTYyOF19
+eyJoaXN0b3J5IjpbLTg3OTA3NjI1Nl19
 -->
