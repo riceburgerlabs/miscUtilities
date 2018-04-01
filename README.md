@@ -56,3 +56,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 * Big thanks to the Corona community.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEwNTAzNzU2NTddfQ==
+-->
