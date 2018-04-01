@@ -20,10 +20,10 @@ These files were written for use with Corona.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 * Big thanks to the Corona community.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYyMzgwMTA0Nl19
+eyJoaXN0b3J5IjpbLTEyOTQwMzU3MDBdfQ==
 -->
