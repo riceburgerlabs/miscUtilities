@@ -25,7 +25,7 @@ print("Printed from main.lua at the base level (no function)")
 
 > 10:50:27 °/main.lua:nil():215: Printed from main.lua at the base level (no function)
 
-*Printed at 10:50 from main.lua - no funciton - line 215*
+*Printed at 10:50 from main.lua - no function - line 215*
 
 
 ----------
@@ -58,5 +58,5 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 # Acknowledgments
 * Big thanks to the Corona community.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NjU4MDE4MjNdfQ==
+eyJoaXN0b3J5IjpbLTEyMTU0MTIxMTddfQ==
 -->
