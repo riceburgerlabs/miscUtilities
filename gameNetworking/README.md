@@ -9,7 +9,7 @@ Download the file. In main.lua require the module and pass over the data file co
 local gameNetwork = require ("scripts.helper.gameNetworking")
 gameNetwork.loadData("scripts.helper.gameNetworkingData")
 ```
-For automatic loggin include a call to login within the `applicationStart` `system` event.
+For automatic log-in include a call to login within the `applicationStart` `system` event.
 ```lua
 local function onSystemEvent( event ) 
     if ( event.type == "applicationStart" ) then
