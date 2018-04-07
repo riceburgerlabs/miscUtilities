@@ -1,7 +1,7 @@
 # gameNetworking.lua
 ## Description
 
-Module that allows **Google Play Game Services** or **Game Center** to be accesses through the same piece of code.
+Module that allows **Google Play Game Services** or **Game Center** to be accesses through the same piece of code.  Code is added to as author has a need, as such, the code is currently limited to Leaderboard and Achievement based actvities.
 
 ## Installing
 Download the file. In main.lua require the module and pass over the data file containing achievement and leaderboard data.
@@ -24,6 +24,11 @@ Runtime:addEventListener( "system", onSystemEvent )
 
 ### Usage
 Use each method as follows.
+
+<details>
+<summary>login() (click to expand)</summary>
+Notes to come.
+</details>
 
 <details>
 <summary>loadData() (click to expand)</summary>
@@ -89,6 +94,16 @@ Returns the current platform
 </details>
 
 <details>
+<summary>submitScore() (click to expand)</summary>
+Notes to come.
+</details>
+
+<details>
+<summary>showLeaderboard() (click to expand)</summary>
+Notes to come.
+</details>
+
+<details>
 <summary>loadScores() (click to expand)</summary>
 
 ## loadScores()
@@ -130,6 +145,20 @@ Retrieves scores from a specified leaderboard.
 
 </details>
 
+<details>
+<summary>submitAchievement() (click to expand)</summary>
+Notes to come.
+</details>
+
+<details>
+<summary>showAchievements() (click to expand)</summary>
+Notes to come.
+</details>
+
+<details>
+<summary>checkScoreAchievement() (click to expand)</summary>
+Notes to come.
+</details>
 
 ----------
 
