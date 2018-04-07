@@ -127,6 +127,10 @@ Retrieves scores from a specified leaderboard.
 
 </details>
 
+
+----------
+
+
 ## Built With
 * [Corona](https://coronalabs.com/) - Corona SDK
 
