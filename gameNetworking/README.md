@@ -1,3 +1,28 @@
+# gameNetworking.lua
+## Description
+
+Module that allows **Google Play Game Services** or **Game Center** to be accesses through the same piece of code.
+
+## Installing
+Download the file and require it in main.lua.
+In main.lua require the module and pass over the data file containing achievement and leaderboard data.
+```lua
+local gameNetwork = require ("scripts.helper.gameNetworking")
+gameNetwork.loadData("scripts.helper.gameNetworkingData")
+```
+For automatic loggin include a call to login within the `applicationStart` `system` event.
+```lua
+local function onSystemEvent( event ) 
+    if ( event.type == "applicationStart" ) then
+		gameNetwork.login()
+        return true
+    end
+end
+Runtime:addEventListener( "system", onSystemEvent )
+```
+### Usage
+Just use print as per usual.
+
 <details>
 <summary>loadData() (click to expand)</summary>
 
