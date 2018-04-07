@@ -35,7 +35,7 @@ Retrieves scores from a specified leaderboard.
 **callback (optional)** - Listener function which receives a [loadScores](https://docs.coronalabs.com/plugin/gpgs/leaderboards/event/loadScores/index.html) event.
 
 ----------
-***GPGS (Android)***
+#### GPGS (Android)
 **reload  (optional)** *Boolean* - If  `true`, the data will be retrieved fresh, not from a cache.
 **position  (optional)** One of the following values:
 -   `"top"`  — the top scores (default).
@@ -45,7 +45,7 @@ Retrieves scores from a specified leaderboard.
 **limit  (optional)** *Number* - Number of scores to load. The maximum and default is  `25`.
 
 ----------
-***Game Center (iOS)***
+#### Game Center (iOS)
 **rangeLow** and **rangeHigh** - Optional two integer values. The first value is a start index and the second value is the number of players to retrieve (less than 100). The default range is `{ 1,25 }`
 
 </details>
