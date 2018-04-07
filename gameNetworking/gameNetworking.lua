@@ -1,87 +1,85 @@
 local public = {}
-local defaults = require "scripts.defaults"
 
-
-local simDevice = "android" -- iOS or android
-
-local waitingM		= require ("scripts.helper.waiting")
-local achievementList = table.load( "achievements.json" ) or {}
-
+-- table of already completed achievements
+-- will check if achievement has already been completed before network call
+local achievementList = table.load( "achievements.json" ) or {} 
 
 -- set up environment for either android or game center
-local gpgs, gameCenter 
+local gpgs, gameCenter, sortAchievements
 local platform
 if onAndroid then
-	platform = "android"
+	platform = "GPGS"
 	gpgs = require( "plugin.gpgs" )
 	gpgs.userInitiated = false
 elseif oniOS then
-	platform = "iOS"
+	platform = "gameCenter"
 	gameCenter = require( "gameNetwork" )
 else 
-	platform = simDevice
+	platform = "GPGS" -- for testing purposes onlu-- gameCenter or GPGS
 end
 
--- 
-
-
+-- stores the achievementList to a json file for future use
 local store = function( )
 	table.save( achievementList, "achievements.json" )
 end 
 
 local sortedAchievements = {}
 
+-- require data from gameNetworkingData
 
-
-public.returnIcon = function()
-	if onSimulator then
-		if simDevice == "iOS" then
-			return "gameCenter"
-		else
-			return "GPGS"
-		end
-	elseif onAndroid then
-		return "GPGS"
-	elseif oniOS then
-		return "gameCenter"
-	end
+public.loadData = function(path)
+	local gameNetworkingData = require (path)
+	public.leaderBoards = gameNetworkingData.leaderBoards or {}
+	public.achievements = gameNetworkingData.achievements or {}
+	sortAchievements()
 end
 
-local leaderBoardBest = function()
+-- return the plaform,  good for loading images etc
+public.returnPlatform = function()
+	return platform
+end
+
+
+-- Accesses top leaderboard scores
+public.loadScores = function(params)
+	local leaderboard = params and params.leaderboard
+	leaderboard = leaderboard and public.leaderBoards[leaderboard][platform] or nil
+	if leaderboard == nil then return end
+
+	-- Set up optional value (and defaults) so correct for each platform
+	-- Both
+	local friendsOnly = platform == "GPGS" and (params.friendsOnly or false) or (platform == "gameCenter" and (params.friendsOnly and "FriendsOnly" or "Global"))
+	local timeSpan = platform == "GPGS" and (params.timeSpan or "all time") or (platform == "gameCenter" and (params.timeSpan == "weekly" and "Week" or params.timeSpan == "daily" and "Today" or "AllTime"))
+	local callback = params.callback or function() end
+	
+	-- Game Center
+	local rangeLow = params.rangeLow or 1 
+	local rangeHigh = params.rangeHigh or 5
+
+	-- GPGS
+	local reload = params.reload or true
+	local position = params.position or "top"
+	local limit  = params.limit or 25
 
 	if ( gpgs ) then
-	-- if not bestScore or bestScore.removeSelf == nil then return end
 		local function listener (event)
 			if event and event.scores then
-				print("highScore is ", event.scores[1].score)
-				defaults.updateHighScore("highScore", event.scores[1].score)
+				callback(event)
 			end
 		end
-		gpgs.leaderboards.loadScores({leaderboardId = "CgkI8er2weIIEAIQAA", reload = true, position = "top", limit = 1, listener = listener} )
+		gpgs.leaderboards.loadScores({leaderboardId = leaderboard, limit = limit, reload = reload, position = position, timeSpan = timeSpan, limit = 1, friendsOnly = friendsOnly, listener = listener} )
 	elseif ( gameCenter ) then
-		local function requestCallback( event )
-	 
-		   	table.print_r(event)
-		   	--table.print_r(event.data)
-		   	print(event.data[1].value)
-		   	local score = event and event.data and event.data[1] and event.data[1].value or nil
-
-		   	print (score)
-		   	if score then
-		   		defaults.updateHighScore("highScore", score)
-		   	end
-		   	--table.print_r(event.data[1].value)
-		    --print("event.localPlayerScore.formattedValue", event.data[1].localPlayerScore.value)
+		local function requestCallback( event )		   	
+	   		callback(event)		   	
 		end
-		print("########## loading highscores", leaderboardID)
 		gameCenter.request( "loadScores",
 	    {
 	        leaderboard =
 	        {
-	            category = "com.riceburgerlabs.braindistraction.bestScore",
-	            playerScope = "Global",  -- "Global" or "FriendsOnly"
-	            timeScope = "AllTime",   -- "AllTime", "Week", or "Today"
-	            range = { 1,5 }
+	            category = leaderboard,
+	            playerScope = friendsOnly,  -- "Global" or "FriendsOnly"
+	            timeScope = timeSpan,   -- "AllTime", "Week", or "Today"
+	            range = { rangeLow,rangeHigh }
 	        },
 	        listener = requestCallback
 		    }
@@ -94,19 +92,14 @@ local function gpgsLoginListener( event )
    		-- if there has been a failed loggin and the user initiated the loggin then load the fail call back function
    		-- else fail silently
    		if gpgs.userInitiated == true then
-   			waitingM.update({text = "Login Unsuccessful", errorMessage = string.first_upper( event.errorMessage .. "." ) })
-   			public.failCallback()
+   			public.failLogInCallback(event.errorMessage)
    		end
    else
-   		
    		if event.name == "login" and event.phase == "logged in" then
-
-   			-- update current highscore to be the same as on gpgs
-			leaderBoardBest()
-			waitingM.removeWait()
-
+			public.successLoginCallback()
    		elseif event.name == "login" and event.phase == "logged out" then
-
+   			-- user correctly logged out
+   			public.loggedOutCallback()
    		end
 
    end
@@ -136,58 +129,24 @@ local function gcInitListener( event )
  	table.print_r(event)
     if event.data then  -- Successful login event
     	print("Successfully logged into GameCenter")
-    	leaderBoardBest()
+    	public.successLoginCallback()
     end
 end
 
-local function submitScoreListener( event )
- 
-    -- Google Play Games Services score submission
-    if ( gpgs ) then
- 
-        if not event.isError then
-            -- local isBest = nil
-            -- if ( event.scores["daily"].isNewBest ) then
-            --     isBest = "a daily"
-            -- elseif ( event.scores["weekly"].isNewBest ) then
-            --     isBest = "a weekly"
-            -- elseif ( event.scores["all time"].isNewBest ) then
-            --     isBest = "an all time"
-            -- end
-            -- if isBest then
-            --     -- Congratulate player on a high score
-            --     local message = "You set " .. isBest .. " high score!"
-            --     native.showAlert( "Congratulations", message, { "OK" } )
-            -- else
-            --     -- Encourage the player to do better
-            --     native.showAlert( "Sorry...", "Better luck next time!", { "OK" } )
-            -- end
-        end
- 
-    -- Apple Game Center score submission
-    elseif ( gameCenter ) then
- 
-        if ( event.type == "setHighScore" ) then
-            -- Congratulate player on a high score
-            -- native.showAlert( "Congratulations", "You set a high score!", { "OK" } )
-        else
-            -- Encourage the player to do better
-            -- native.showAlert( "Sorry...", "Better luck next time!", { "OK" } )
-        end
-    end
-end
 
--- Public/Access Functions
-public.login = function(userInitiated, params)
-	public.failCallback = params and params.failCallback or nil
-	print("userInitiated", public.userInitiated)
+-- Public/Access Functions to log into Game Network
+public.login = function(params)
+
+	-- store any callbacks
+	public.failLogInCallback = params and params.failLogInCallback or function() end
+	public.successLoginCallback = params and params.successLoginCallback or function() end
+	public.loggedOutCallback = params and params.loggedOutCallback or function() end
 	if onSimulator then 
-		print("----- On Simulator So Not Logging In To Game Networking")
 		return 
 	end
 	if ( gpgs ) then
-		gpgs.userInitiated = userInitiated or false
-	    -- Initialize Google Play Games Services
+		 -- Initialize Google Play Games Services
+		gpgs.userInitiated = params and params.userInitiated or false
 	    gpgs.init( gpgsInitListener )
 	elseif ( gameCenter ) then
 	    -- Initialize Apple Game Center
@@ -200,16 +159,24 @@ public.isConnected = function ()
 	return onAndroid and gpgs.isConnected()
 end
 
+-- submit a new high score to the appropriate leaderboard
 public.submitScore = function (score, leaderboard)
-	if not score then return end
-	if not leaderboard then 
+	if not score then return end -- if no score is supplied then exit
+
+	if not leaderboard then -- if no leaderboard is given then return the first leaderboard on the sorted leaderboard list
 		for i, v in pairs(public.leaderBoards) do
 			leaderboard = i
 			break
 		end
 	end
-	leaderboard = public.leaderBoards[leaderboard][platform] or nil
-	print("submitting score of ", score , " to ", leaderboard)
+	local leaderboard = public.leaderBoards[leaderboard][platform] or nil
+
+	print("Submitting score ", score, " to leaderboard ", leaderboard)
+
+	local function submitScoreListener( event )
+ 
+	end
+
 
 	if ( gpgs ) then
         -- Submit a score to Google Play Games Services
@@ -233,37 +200,45 @@ public.submitScore = function (score, leaderboard)
     end
 end
 
-public.submitAchievement = function(achievementID)
-	--print(public.achievements, achievementID, platform)
-	--table.print_r(public.achievements)
-	achievementID = public.achievements[achievementID][platform] or nil
-	--print("Submitting ID", achievementID)
-	local listener = function(event)
-		table.print_r(event)
+
+-- submit a new achievement to the appropriate game network
+public.submitAchievement = function(achievementID, params)
+
+	local achievementID = achievementID and public.achievements[achievementID][platform] or nil
+	if not achievementID then
+		return
 	end
 
 	-- check if achievenment has alread been done, if so then return
-
 	if achievementList[achievementID] == true then
 		return
-	else
-		achievementList[achievementID] = true
-		--print("adding a new achievemtn to the file")
-		store()
 	end
 
-	if not achievementID then 
-		return
-	elseif ( gpgs ) then
+	--iOS
+	local showsCompletionBanner = params and params.showsCompletionBanner or true
+	local percentComplete = params and params.percentComplete or 100
+
+	local listener = function(event)
+		-- update achievement list so that the same achievement is not called twice
+		-- Only do this if on Google or percentComplete == 100
+		if platform == "GPGS" or (platform == "gameCenter" and percentComplete == 100) then
+			achievementList[achievementID] = true
+			store()
+		end
+	end
+
+	if ( gpgs ) then
+		-- Submit an achievemnt to Google Play Games Services
 		gpgs.achievements.unlock( {listener =listener, achievementId = achievementID} )
 	elseif ( gameCenter ) then
+		-- Submit an achievemnt to Apple Game Center
 		gameCenter.request( "unlockAchievement",
 		    {
 		        achievement =
 		        {
 		            identifier = achievementID,
-		            percentComplete = 100,
-		            showsCompletionBanner = true
+		            percentComplete = percentComplete,
+		            showsCompletionBanner = showsCompletionBanner
 		        },
 		        listener = listener
 		    }
@@ -271,36 +246,35 @@ public.submitAchievement = function(achievementID)
 	end
 end
 
+-- show achievements from the appropriate game network
 public.showAchievements = function()
 	local listener = function(event)
-		print("showAchievements listener")
-		table.print_r(event)
+
 	end
-	print("---showAchievements")
+
 	if ( gpgs ) then
+		-- Show achievemnts for Google Play Games Services
 		local params = {reload = true, listener = listener}
-		gpgs.achievements.load( params )
+		gpgs.achievements.load( params ) -- reloads the list so it is most accurate
 		gpgs.achievements.show( listener)
 	elseif ( gameCenter ) then
+		-- Show achievemnts for Apple Game Center
 		gameCenter.show( "achievements", { listener=listener } )
 	end
 	
 end
 
-
+-- show leaderboard from the appropriate game network
 public.showLeaderboard = function(leaderboard)
-	if not leaderboard then 
-		for i, v in pairs(public.leaderBoards) do
-			leaderboard = i
-			break
-		end
-	end
-	leaderboard = public.leaderBoards[leaderboard][platform] or nil
-	
+	local leaderboard = leaderboard and public.leaderBoards[leaderboard][platform] or nil
+
+	--Android
+	local friendsOnly = params.friendsOnly or false
+	local timeSpan = params.timeSpan or "all time"
+
 	if ( gpgs ) then
 	    -- Show a Google Play Games Services leaderboard
-	    gpgs.leaderboards.show( leaderboard )
-	 
+	    gpgs.leaderboards.show( {leaderboardId = leaderboard, friendsOnly = friendsOnly, timeSpan = timeSpan} )
 	elseif ( gameCenter ) then
 	    -- Show an Apple Game Center leaderboard
 	    gameCenter.show( "leaderboards",
@@ -312,70 +286,20 @@ public.showLeaderboard = function(leaderboard)
 	end
 end
 
+-- check score based achievements
+-- checks sorted achievements and if the current score is higher than the points submit achievement
 public.checkScoreAchievement = function(currentScore)
-	print("Checking Achievemtn for score", currentScore)
+
 	for i =1, #sortedAchievements do
 		if currentScore >= sortedAchievements[i].points then
 			public.submitAchievement(sortedAchievements[i].key)
-			print("achievement successful", sortedAchievements[i].key)
-
 			return true
 		end
 	end
-	print("no achievement")
 end
 
-
--- Data
-public.leaderBoards = {
-	bestScore = {
-		android = "CgkI8er2weIIEAIQAA",
-		iOS =	"com.riceburgerlabs.braindistraction.bestScore"
-	}	
-}
-
-public.achievements = {
-	A_WAVE_1_COMPLETED = {
-		points = 10,
-		android = 'CgkI8er2weIIEAIQAg',
-		iOS = 'com.riceburgerlabs.braindistraction.Wave_1_Completed'
-	},
-	A_50_POINTS = {
-		points = 50,
-		android = 'CgkI8er2weIIEAIQBQ',
-		iOS = 'com.riceburgerlabs.braindistraction.50_POINTS'
-	},
-	A_100_POINTS = {
-		points = 100,
-		android = 'CgkI8er2weIIEAIQBg',
-		iOS = 'com.riceburgerlabs.braindistraction.100_POINTS'
-	},
-	A_250_POINTS = {
-		points = 250,
-		android = 'CgkI8er2weIIEAIQBw',
-		iOS = 'com.riceburgerlabs.braindistraction.250_POINTS'
-	},
-	A_500_POINTS = {
-		points = 500,
-		android = 'CgkI8er2weIIEAIQCA',
-		iOS = 'com.riceburgerlabs.braindistraction.500_POINTS'
-	},
-	A_1000_POINTS = {
-		points = 1000,
-		android = 'CgkI8er2weIIEAIQCQ',
-		iOS = 'com.riceburgerlabs.braindistraction.1000_POINTS'
-	},
-	A_DOUBLE_UP = {
-		android = 'CgkI8er2weIIEAIQAw',
-		iOS = 'com.riceburgerlabs.braindistraction.DOUBLE_UP'
-	},
-	A_Lives_again = {
-		android = 'CgkI8er2weIIEAIQBA',
-		iOS = 'com.riceburgerlabs.braindistraction.LIVES_AGAIN'
-	},
-}
-
-local sortAchievements = function()
+-- sort score by points
+sortAchievements = function()
 	for k, v in pairs(public.achievements) do
 		if v.points then
 			sortedAchievements[#sortedAchievements + 1] = v
@@ -387,7 +311,7 @@ local sortAchievements = function()
 	end
 	table.sort( sortedAchievements, compare )
 end
-sortAchievements()
+
 
 
 return public
