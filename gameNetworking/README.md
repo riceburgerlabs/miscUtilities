@@ -108,20 +108,37 @@ Logs into the either **Google Play Game Services** or **Game Center**.
 
 ## returnPlatform()
 ### Overview
-Returns the current platform
+Returns the current platform.  Good for when you want your main code to execute differently for specific plaforms i.e. loading the right image etc.
 ### Syntax
 `returnPlatform()`
 </details>
 
 <details>
 <summary>submitScore() (click to expand)</summary>
-Notes to come.
+
+## submitScore()
+
+### Overview
+
+Submits a score to a specific leaderboard on the corresponding platform.
+
+### Syntax
+`submitScore( score, leaderboard )`
+
+#### Parameter Reference
+
+----------
+
+#### Generic (work across both Android and iOS)
+**score (required)** - *interger* - The score value.
+leaderboard (required) - string - Reference of the Leaderboard to submit to. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
 </details>
 
 <details>
 <summary>showLeaderboard() (click to expand)</summary>
 Notes to come.
 </details>
+
 
 <details>
 <summary>loadScores() (click to expand)</summary>
