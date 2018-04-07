@@ -131,7 +131,8 @@ Submits a score to a specific leaderboard on the corresponding platform.
 
 #### Generic (work across both Android and iOS)
 **score (required)** - *interger* - The score value.
-leaderboard (required) - string - Reference of the Leaderboard to submit to. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
+
+**leaderboard (required)** - *string* - Reference of the Leaderboard to submit to. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
 </details>
 
 <details>
