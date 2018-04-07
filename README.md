@@ -1,3 +1,8 @@
+<details>
+<summary>"Click to expand"</summary>
+this is hidden
+</details>
+
 # miscUtilities
 Random pieces of code that might be helpful to people
 
