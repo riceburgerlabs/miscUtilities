@@ -27,7 +27,26 @@ Use each method as follows.
 
 <details>
 <summary>login() (click to expand)</summary>
-Notes to come.
+## login()
+
+### Overview
+
+Logs into the either **Google Play Game Services** or **Game Center**.
+
+### Syntax
+`login( params )`
+
+#### Parameter Reference
+----------
+
+#### Generic (work across both Android and iOS)
+
+**successLoginCallback (optional)** - *function* - will be called when a login attempt succeeds
+**failLogInCallback (optional)** - *function* - will be called when a login attempt fails
+
+#### GPGS (Android)
+**loggedOutCallback (optional)** - *function* - will be called when user logs our
+**userInitiated (optional)** *Boolean* - If `true`, a sign-in dialog will appear if the user is not logged in. Use this when the user specifically wants to log in via a UI button/element instead of being logged in automatically. Default is `false`
 </details>
 
 <details>
