@@ -1,6 +1,6 @@
 <details>
-<summary>## returnPlatform()</summary>
-
+<summary>returnPlatform()</summary>
+## returnPlatform()
 ### Overview
 Returns the current platform
 ### Syntax
