@@ -4,8 +4,7 @@
 Module that allows **Google Play Game Services** or **Game Center** to be accesses through the same piece of code.
 
 ## Installing
-Download the file and require it in main.lua.
-In main.lua require the module and pass over the data file containing achievement and leaderboard data.
+Download the file. In main.lua require the module and pass over the data file containing achievement and leaderboard data.
 ```lua
 local gameNetwork = require ("scripts.helper.gameNetworking")
 gameNetwork.loadData("scripts.helper.gameNetworkingData")
@@ -21,7 +20,7 @@ end
 Runtime:addEventListener( "system", onSystemEvent )
 ```
 ### Usage
-Just use print as per usual.
+Use each method as follows.
 
 <details>
 <summary>loadData() (click to expand)</summary>
