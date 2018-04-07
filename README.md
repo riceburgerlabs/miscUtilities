@@ -1,8 +1,3 @@
-<details>
-<summary>"Click to expand"</summary>
-this is hidden
-</details>
-
 # miscUtilities
 Random pieces of code that might be helpful to people
 
@@ -33,5 +28,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 eyJoaXN0b3J5IjpbLTEyOTQwMzU3MDBdfQ==
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDIzODkwNDhdfQ==
+eyJoaXN0b3J5IjpbLTEwODcxMjUyOTFdfQ==
 -->
