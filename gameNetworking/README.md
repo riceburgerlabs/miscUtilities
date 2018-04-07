@@ -19,6 +19,9 @@ local function onSystemEvent( event )
 end
 Runtime:addEventListener( "system", onSystemEvent )
 ```
+
+----------
+
 ### Usage
 Use each method as follows.
 
