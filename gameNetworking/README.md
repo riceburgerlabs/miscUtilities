@@ -24,7 +24,7 @@ Retrieves scores from a specified leaderboard.
 
 ----------
 
- ***Generic (work across both Android and iOS)***
+#### Generic (work across both Android and iOS)
  **leaderboard (required)** - Leaderboard ID from which to load scores.
 **friendsOnly  (optional)** *Boolean* - If  `true`, loads only scores for the current player's friends.
 **timeSpan (optional)**  - One of the following values:
