@@ -1,13 +1,3 @@
-<details>
-<summary>returnPlatform()</summary>
-## returnPlatform()
-### Overview
-Returns the current platform
-### Syntax
-`returnPlatform()`
-</details>
-
-
 # miscUtilities
 Random pieces of code that might be helpful to people
 
