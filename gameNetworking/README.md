@@ -27,6 +27,7 @@ Use each method as follows.
 
 <details>
 <summary>login() (click to expand)</summary>
+	
 ## login()
 
 ### Overview
