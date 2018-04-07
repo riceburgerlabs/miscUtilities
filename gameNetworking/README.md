@@ -26,31 +26,6 @@ Runtime:addEventListener( "system", onSystemEvent )
 Use each method as follows.
 
 <details>
-<summary>login() (click to expand)</summary>
-	
-## login()
-
-### Overview
-
-Logs into the either **Google Play Game Services** or **Game Center**.
-
-### Syntax
-`login( params )`
-
-#### Parameter Reference
-----------
-
-#### Generic (work across both Android and iOS)
-
-**successLoginCallback (optional)** - *function* - will be called when a login attempt succeeds
-**failLogInCallback (optional)** - *function* - will be called when a login attempt fails
-
-#### GPGS (Android)
-**loggedOutCallback (optional)** - *function* - will be called when user logs our
-**userInitiated (optional)** *Boolean* - If `true`, a sign-in dialog will appear if the user is not logged in. Use this when the user specifically wants to log in via a UI button/element instead of being logged in automatically. Default is `false`
-</details>
-
-<details>
 <summary>loadData() (click to expand)</summary>
 
 ## loadData()
@@ -101,6 +76,31 @@ return public
 - The key given on each node (e.g. `bestScore` or `A_50_POINTS`) will be the values you will use when submitting or retrieving achievements or scores in your code (see examples below).
 - `GPGS = ` and `gameCenter =` expect a string that corresponds to the Achievement or Leaderboard IDs in the corresponding store.
 -  `Points` can be used for incremental achievements where points are used. i.e pass over a score or point value to `checkScoreAchievement()` (see notes later) and it will automatically process it and give the appropriate achievement.
+</details>
+
+<details>
+<summary>login() (click to expand)</summary>
+	
+## login()
+
+### Overview
+
+Logs into the either **Google Play Game Services** or **Game Center**.
+
+### Syntax
+`login( params )`
+
+#### Parameter Reference
+----------
+
+#### Generic (work across both Android and iOS)
+
+**successLoginCallback (optional)** - *function* - will be called when a login attempt succeeds
+**failLogInCallback (optional)** - *function* - will be called when a login attempt fails
+
+#### GPGS (Android)
+**loggedOutCallback (optional)** - *function* - will be called when user logs our
+**userInitiated (optional)** *Boolean* - If `true`, a sign-in dialog will appear if the user is not logged in. Use this when the user specifically wants to log in via a UI button/element instead of being logged in automatically. Default is `false`
 </details>
 
 <details>
