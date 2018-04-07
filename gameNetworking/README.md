@@ -1,4 +1,57 @@
 <details>
+<summary>loadData() (click to expand)</summary>
+
+## loadData()
+### Overview
+Loads achievement and leaderboard data from specified file.
+### Syntax
+`loadData( file )` 
+
+#### Parameter Reference
+**file (required)** - path to file containing data
+
+##### Linked file should take the following format.
+ ```lua
+ local public = {}
+
+public.leaderBoards = {
+	bestScore = {
+		GPGS = "fdfsfsfsdfrvevver",
+		gameCenter = "com.test.leaderboardname"
+	}	
+}
+
+public.achievements = {
+	A_WAVE_1_COMPLETED = {
+		points = 10,
+		GPGS = 'dfsdfsfsdfsdss',
+		gameCenter = 'com.test.Wave_1_Completed'
+	},
+	A_50_POINTS = {
+		points = 50,
+		android = 'dfsfdsfscdscdscs',
+		gameCenter = 'com.test.50_POINTS'
+	},
+	A_DOUBLE_UP = {
+		GPGS = 'vsddvsvsv',
+		gameCenter = 'com.test.DOUBLE_UP'
+	},
+	A_Lives_again = {
+		GPGS = 'brebrbefbbfdbdfdb',
+		gameCenter = 'com.test.LIVES_AGAIN'
+	},
+}
+
+return public
+```
+
+##### Notes
+- The key given on each node (e.g. `bestScore` or `A_50_POINTS`) will be the values you will use when submitting or retrieving achievements or scores in your code (see examples below).
+- `GPGS = ` and `gameCenter =` expect a string that corresponds to the Achievement or Leaderboard IDs in the corresponding store.
+-  `Points` can be used for incremental achievements where points are used. i.e pass over a score or point value to `checkScoreAchievement()` (see notes later) and it will automatically process it and give the appropriate achievement.
+</details>
+
+<details>
 <summary>returnPlatform() (click to expand)</summary>
 
 ## returnPlatform()
