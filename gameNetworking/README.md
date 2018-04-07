@@ -126,3 +126,18 @@ Retrieves scores from a specified leaderboard.
 **rangeLow** and **rangeHigh** - Optional two integer values. The first value is a start index and the second value is the number of players to retrieve (less than 100). The default range is `{ 1,25 }`
 
 </details>
+
+## Built With
+* [Corona](https://coronalabs.com/) - Corona SDK
+
+## Authors
+
+* Multiple sources on the Corona forums
+* **Rice Burger Labs** - [Rice Burger Labs](http://www.riceburgerlabs.com)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details
+
+# Acknowledgments
+* Big thanks to the Corona community.
