@@ -25,6 +25,8 @@ Runtime:addEventListener( "system", onSystemEvent )
 ### Usage
 Use each method as follows.
 
+----------
+
 <details>
 <summary>loadData() (click to expand)</summary>
 
@@ -107,6 +109,8 @@ Logs into the either **Google Play Game Services** or **Game Center**.
 - **loggedOutCallback (optional)** - *function* - will be called when user logs our
 - **userInitiated (optional)** *Boolean* - If `true`, a sign-in dialog will appear if the user is not logged in. Use this when the user specifically wants to log in via a UI button/element instead of being logged in automatically. Default is `false`
 </details>
+
+----------
 
 <details>
 <summary>returnPlatform() (click to expand)</summary>
@@ -252,6 +256,8 @@ Unlocks an achievement.
 
 </details>
 
+----------
+
 <details>
 <summary>showAchievements() (click to expand)</summary>
 
@@ -276,9 +282,9 @@ Shows all achievements.
 #### GPGS (Android)
 - **reload (optional)** - *boolean* - If `true` (default) then `load` will be called with a `reload` value of `true` to force it load new values and not cached ones.
 
-----------
-
 </details>
+
+----------
 
 <details>
 <summary>checkScoreAchievement() (click to expand)</summary>
