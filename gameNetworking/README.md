@@ -152,19 +152,15 @@ Submits a score to a specific leaderboard on the corresponding platform.
 Shows a specific leaderboard, or all leaderboards.
 
 ### Syntax
-`showLeaderboard( params )`
+`showLeaderboard( leaderboard, params )`
 
 ### Parameter Reference
 
-**params (optional)** - *table*
-
-----------
-
 #### Generic (work across both Android and iOS)
-- **leaderboard (optional)** - *string* - Reference of the Leaderboard to submit to, if this is blank then all leaderboards will be shown. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
+**leaderboard (required)** - *string* - Reference of the Leaderboard to show. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
 
 #### GPGS (Android)
-
+**params (optional)** - *table*
 - **friendsOnly  (optional)** *Boolean* - If  `true`, loads only scores for the current player's friends.
 - **timeSpan (optional)**  - One of the following values:
 	-   `"all time"`  — all scores (default).
