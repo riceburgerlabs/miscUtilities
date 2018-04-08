@@ -78,6 +78,8 @@ return public
 -  `Points` can be used for incremental achievements where points are used. i.e pass over a score or point value to `checkScoreAchievement()` (see notes later) and it will automatically process it and give the appropriate achievement.
 </details>
 
+----------
+
 <details>
 <summary>login() (click to expand)</summary>
 	
@@ -115,6 +117,8 @@ Returns the current platform.  Good for when you want your main code to execute 
 ### Syntax
 `returnPlatform()`
 </details>
+
+----------
 
 <details>
 <summary>submitScore() (click to expand)</summary>
@@ -169,6 +173,7 @@ Shows a specific leaderboard, or all leaderboards.
 
 </details>
 
+----------
 
 <details>
 <summary>loadScores() (click to expand)</summary>
