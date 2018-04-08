@@ -34,8 +34,8 @@ Loads achievement and leaderboard data from specified file.
 ### Syntax
 `loadData( file )` 
 
-#### Parameter Reference
-**file (required)** - path to file containing data
+### Parameter Reference
+**file (required)** - *path* - path to file containing data
 
 ##### Linked file should take the following format.
  ```lua
@@ -90,17 +90,20 @@ Logs into the either **Google Play Game Services** or **Game Center**.
 ### Syntax
 `login( params )`
 
-#### Parameter Reference
+### Parameter Reference
+
+**params (optional)** - *table*
+
 ----------
 
 #### Generic (work across both Android and iOS)
 
-**successLoginCallback (optional)** - *function* - will be called when a login attempt succeeds
-**failLogInCallback (optional)** - *function* - will be called when a login attempt fails
+- **successLoginCallback (optional)** - *function* - will be called when a login attempt succeeds
+- **failLogInCallback (optional)** - *function* - will be called when a login attempt fails
 
 #### GPGS (Android)
-**loggedOutCallback (optional)** - *function* - will be called when user logs our
-**userInitiated (optional)** *Boolean* - If `true`, a sign-in dialog will appear if the user is not logged in. Use this when the user specifically wants to log in via a UI button/element instead of being logged in automatically. Default is `false`
+- **loggedOutCallback (optional)** - *function* - will be called when user logs our
+- **userInitiated (optional)** *Boolean* - If `true`, a sign-in dialog will appear if the user is not logged in. Use this when the user specifically wants to log in via a UI button/element instead of being logged in automatically. Default is `false`
 </details>
 
 <details>
@@ -125,9 +128,7 @@ Submits a score to a specific leaderboard on the corresponding platform.
 ### Syntax
 `submitScore( score, leaderboard, params )`
 
-#### Parameter Reference
-
-----------
+### Parameter Reference
 
 #### Generic (work across both Android and iOS)
 **score (required)** - *interger* - The score value.
@@ -135,7 +136,7 @@ Submits a score to a specific leaderboard on the corresponding platform.
 **leaderboard (required)** - *string* - Reference of the Leaderboard to submit to. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
 
 #### GPGS (Android)
-**params (optional)** - *table* - table containing Android specific options
+**params (optional)** - *table*
 - **listener** - *function* - Listener function which receives a submit event.
 - **tag** - *String*- Optional additional info. Must be  URL-encoded  and a maximum size of 64 bytes.
 
@@ -153,22 +154,22 @@ Shows a specific leaderboard, or all leaderboards.
 ### Syntax
 `showLeaderboard( params )`
 
-#### Parameter Reference
+### Parameter Reference
 
 **params (optional)** - *table*
 
 ----------
 
 #### Generic (work across both Android and iOS)
-**leaderboard (optional)** - *string* - Reference of the Leaderboard to submit to, if this is blank then all leaderboards will be shown. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
+- **leaderboard (optional)** - *string* - Reference of the Leaderboard to submit to, if this is blank then all leaderboards will be shown. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
 
 #### GPGS (Android)
 
-**friendsOnly  (optional)** *Boolean* - If  `true`, loads only scores for the current player's friends.
-**timeSpan (optional)**  - One of the following values:
--   `"all time"`  — all scores (default).
--   `"weekly"`  — scores from the week.
--   `"daily"`  — scores from the day.
+- **friendsOnly  (optional)** *Boolean* - If  `true`, loads only scores for the current player's friends.
+- **timeSpan (optional)**  - One of the following values:
+	-   `"all time"`  — all scores (default).
+	-   `"weekly"`  — scores from the week.
+	-   `"daily"`  — scores from the day.
 
 </details>
 
@@ -183,33 +184,34 @@ Shows a specific leaderboard, or all leaderboards.
 Retrieves scores from a specified leaderboard.
 
 ### Syntax
-`loadScores( params )`
+`loadScores( leaderboard, params )`
 
-#### Parameter Reference
-
-**params (required)** - *table*
+### Parameter Reference
 
 ----------
 
 #### Generic (work across both Android and iOS)
  **leaderboard (required)** - Leaderboard ID from which to load scores.
-**friendsOnly  (optional)** *Boolean* - If  `true`, loads only scores for the current player's friends.
-**timeSpan (optional)**  - One of the following values:
--   `"all time"`  — all scores (default).
--   `"weekly"`  — scores from the week.
--   `"daily"`  — scores from the day.
+ 
+**params (required)** - *table*
 
-**callback (optional)** - Listener function which receives a [oadScores event.
+ - **friendsOnly  (optional)** *Boolean* - If  `true`, loads only scores for the current player's friends.
+- **timeSpan (optional)**  - One of the following values:
+	-   `"all time"`  — all scores (default).
+	-   `"weekly"`  — scores from the week.
+	-   `"daily"`  — scores from the day.
+
+- **callback (optional)** - Listener function which receives a [oadScores event.
 
 ----------
 #### GPGS (Android)
-**reload  (optional)** *Boolean* - If  `true`, the data will be retrieved fresh, not from a cache.
-**position  (optional)** One of the following values:
--   `"top"`  — the top scores (default).
--   `"single"`  — the current player's score.
--   `"centered"`  — scores around the current player's score.
+- **reload  (optional)** *Boolean* - If  `true`, the data will be retrieved fresh, not from a cache.
+- **position  (optional)** One of the following values:
+	-   `"top"`  — the top scores (default).
+	-   `"single"`  — the current player's score.
+	-   `"centered"`  — scores around the current player's score.
 
-**limit  (optional)** *Number* - Number of scores to load. The maximum and default is  `25`.
+- **limit  (optional)** *Number* - Number of scores to load. The maximum and default is  `25`.
 
 ----------
 #### Game Center (iOS)
@@ -229,7 +231,7 @@ Unlocks an achievement.
 ### Syntax
 `unlockAchievement( achievementID, params )`
 
-#### Parameter Reference
+### Parameter Reference
 
 ----------
 
@@ -261,7 +263,7 @@ Shows all achievements.
 ### Syntax
 `showAchievements(  params )`
 
-#### Parameter Reference
+### Parameter Reference
 
 **params (optional)** - *table*
 
@@ -271,7 +273,7 @@ Shows all achievements.
 
 ----------
 #### GPGS (Android)
-- reload (optional) - boolean - If `true` (default) then `load` will be called with a `reload` value of `true` to force it load new values and not cached ones.
+- **reload (optional)** - *boolean* - If `true` (default) then `load` will be called with a `reload` value of `true` to force it load new values and not cached ones.
 
 ----------
 
@@ -289,16 +291,13 @@ Checks score values of score based achievements, submits achievement if required
 ### Syntax
 `checkScoreAchievement( score )`
 
-#### Parameter Reference
+### Parameter Reference
 
 #### Generic (work across both Android and iOS)
 
-score (required) - number - the score that needs to be checked against achievement list
+**score (required)** - *number* - the score that needs to be checked against achievement list
 
 </details>
-
-----------
-
 
 ## Built With
 * [Corona](https://coronalabs.com/) - Corona SDK
