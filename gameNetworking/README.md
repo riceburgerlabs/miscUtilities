@@ -124,6 +124,8 @@ Returns the current platform.  Good for when you want your main code to execute 
 
 ----------
 
+## Leaderboards
+
 <details>
 <summary>submitScore() (click to expand)</summary>
 
@@ -224,6 +226,8 @@ Retrieves scores from a specified leaderboard.
 
 ----------
 
+## Achievements
+
 <details>
 <summary>unlockAchievement() (click to expand)</summary>
 
@@ -256,8 +260,6 @@ Unlocks an achievement.
 
 </details>
 
-----------
-
 <details>
 <summary>showAchievements() (click to expand)</summary>
 
@@ -283,8 +285,6 @@ Shows all achievements.
 - **reload (optional)** - *boolean* - If `true` (default) then `load` will be called with a `reload` value of `true` to force it load new values and not cached ones.
 
 </details>
-
-----------
 
 <details>
 <summary>checkScoreAchievement() (click to expand)</summary>
