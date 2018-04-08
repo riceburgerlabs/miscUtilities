@@ -124,7 +124,7 @@ Returns the current platform.  Good for when you want your main code to execute 
 
 ----------
 
-## Leaderboards
+### Leaderboards
 
 <details>
 <summary>submitScore() (click to expand)</summary>
@@ -226,7 +226,7 @@ Retrieves scores from a specified leaderboard.
 
 ----------
 
-## Achievements
+### Achievements
 
 <details>
 <summary>unlockAchievement() (click to expand)</summary>
