@@ -229,7 +229,7 @@ Retrieves scores from a specified leaderboard.
 Unlocks an achievement.
 
 ### Syntax
-`unlockAchievement( achievementID, params )`
+`unlockAchievement( achievement, params )`
 
 ### Parameter Reference
 
@@ -237,7 +237,7 @@ Unlocks an achievement.
 
 #### Generic (work across both Android and iOS)
 
-**achievementID (required)** - *string* - Reference of the Achievemnt to submit unlock. Note - this is not the `achievementID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `A_WAVE_1_COMPLETED`
+**achievement (required)** - *string* - Reference of the Achievement to submit unlock. Note - this is not the `achievementID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `A_WAVE_1_COMPLETED`
 
 **params (optional)** - *table*
 
