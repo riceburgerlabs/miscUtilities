@@ -124,6 +124,16 @@ Returns the current platform.  Good for when you want your main code to execute 
 `returnPlatform()`
 </details>
 
+<details>
+<summary>isConnected() (click to expand)</summary>
+
+## isConnected() (GPGS Only)
+### Overview
+Returns a boolean of `true` if the current user is logged in.
+### Syntax
+`isConnected()`
+</details>
+
 ----------
 
 #### Leaderboards
