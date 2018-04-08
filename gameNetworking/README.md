@@ -177,8 +177,6 @@ Shows a specific leaderboard, or all leaderboards.
 
 </details>
 
-----------
-
 <details>
 <summary>loadScores() (click to expand)</summary>
 
@@ -223,6 +221,8 @@ Retrieves scores from a specified leaderboard.
 **rangeLow** and **rangeHigh** - Optional two integer values. The first value is a start index and the second value is the number of players to retrieve (less than 100). The default range is `{ 1,25 }`
 
 </details>
+
+----------
 
 <details>
 <summary>unlockAchievement() (click to expand)</summary>
