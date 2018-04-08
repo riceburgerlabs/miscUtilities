@@ -199,7 +199,7 @@ Retrieves scores from a specified leaderboard.
 -   `"weekly"`  — scores from the week.
 -   `"daily"`  — scores from the day.
 
-**callback (optional)** - Listener function which receives a [loadScores](https://docs.coronalabs.com/plugin/gpgs/leaderboards/event/loadScores/index.html) event.
+**callback (optional)** - Listener function which receives a [oadScores event.
 
 ----------
 #### GPGS (Android)
@@ -218,18 +218,83 @@ Retrieves scores from a specified leaderboard.
 </details>
 
 <details>
-<summary>submitAchievement() (click to expand)</summary>
-Notes to come.
+<summary>unlockAchievement() (click to expand)</summary>
+
+## unlockAchievement()
+
+### Overview
+
+Unlocks an achievement.
+
+### Syntax
+`unlockAchievement( achievementID, params )`
+
+#### Parameter Reference
+
+----------
+
+#### Generic (work across both Android and iOS)
+
+**achievementID (required)** - *string* - Reference of the Achievemnt to submit unlock. Note - this is not the `achievementID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `A_WAVE_1_COMPLETED`
+
+**params (optional)** - *table*
+
+- **callback (optional)** - *function* - callback function which receives an unlock event.
+
+----------
+#### Game Center (iOS)
+
+- **showsCompletionBanner (optional)**  - *boolean* - if set to `true`, will cause Apple to automatically show a completion banner when `percentComplete` reaches `100`
+- **percentComplete (optional)** - *interger* -  represents the completion percentage of the achievement. Setting this value to `100` will fully unlock the achievement. If this field is omitted, it's assumed this value is `100`
+
 </details>
 
 <details>
 <summary>showAchievements() (click to expand)</summary>
-Notes to come.
+
+## showAchievements()
+
+### Overview
+
+Shows all achievements.
+
+### Syntax
+`showAchievements(  params )`
+
+#### Parameter Reference
+
+**params (optional)** - *table*
+
+#### Generic (work across both Android and iOS)
+
+- **listener (optional)** - *function* - Listener function which receives a show event.
+
+----------
+#### GPGS (Android)
+- reload (optional) - boolean - If `true` (default) then `load` will be called with a `reload` value of `true` to force it load new values and not cached ones.
+
+----------
+
 </details>
 
 <details>
 <summary>checkScoreAchievement() (click to expand)</summary>
-Notes to come.
+
+## checkScoreAchievement()
+
+### Overview
+
+Checks score values of score based achievements, submits achievement if required..
+
+### Syntax
+`checkScoreAchievement( score )`
+
+#### Parameter Reference
+
+#### Generic (work across both Android and iOS)
+
+score (required) - number - the score that needs to be checked against achievement list
+
 </details>
 
 ----------
