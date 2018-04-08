@@ -27,7 +27,7 @@ Use each method as follows.
 
 ----------
 
-### Setup
+#### Setup
 
 <details>
 <summary>loadData() (click to expand)</summary>
@@ -112,7 +112,7 @@ Logs into the either **Google Play Game Services** or **Game Center**.
 
 ----------
 
-### Misc
+#### Misc
 
 <details>
 <summary>returnPlatform() (click to expand)</summary>
@@ -126,7 +126,7 @@ Returns the current platform.  Good for when you want your main code to execute 
 
 ----------
 
-### Leaderboards
+#### Leaderboards
 
 <details>
 <summary>submitScore() (click to expand)</summary>
@@ -228,7 +228,7 @@ Retrieves scores from a specified leaderboard.
 
 ----------
 
-### Achievements
+#### Achievements
 
 <details>
 <summary>unlockAchievement() (click to expand)</summary>
