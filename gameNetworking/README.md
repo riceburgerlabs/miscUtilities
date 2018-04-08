@@ -123,7 +123,7 @@ Returns the current platform.  Good for when you want your main code to execute 
 Submits a score to a specific leaderboard on the corresponding platform.
 
 ### Syntax
-`submitScore( score, leaderboard )`
+`submitScore( score, leaderboard, params )`
 
 #### Parameter Reference
 
@@ -133,6 +133,12 @@ Submits a score to a specific leaderboard on the corresponding platform.
 **score (required)** - *interger* - The score value.
 
 **leaderboard (required)** - *string* - Reference of the Leaderboard to submit to. Note - this is not the `leaderboardID` that you use with the actual stores, but rather the key given in the data file specified in `loadData()` i.e `bestScore`
+
+#### GPGS (Android)
+**params (optional)** - *table* - table containing Android specific options
+- **listener** - *function* - Listener function which receives a submit event.
+- **tag** - *String*- Optional additional info. Must be  URL-encoded  and a maximum size of 64 bytes.
+
 </details>
 
 <details>
