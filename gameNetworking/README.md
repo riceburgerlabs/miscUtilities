@@ -27,6 +27,8 @@ Use each method as follows.
 
 ----------
 
+### Setup
+
 <details>
 <summary>loadData() (click to expand)</summary>
 
@@ -80,8 +82,6 @@ return public
 -  `Points` can be used for incremental achievements where points are used. i.e pass over a score or point value to `checkScoreAchievement()` (see notes later) and it will automatically process it and give the appropriate achievement.
 </details>
 
-----------
-
 <details>
 <summary>login() (click to expand)</summary>
 	
@@ -111,6 +111,8 @@ Logs into the either **Google Play Game Services** or **Game Center**.
 </details>
 
 ----------
+
+### Misc
 
 <details>
 <summary>returnPlatform() (click to expand)</summary>
