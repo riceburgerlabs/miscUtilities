@@ -16,7 +16,7 @@ elseif oniOS then
 	gameCenter = require( "gameNetwork" )
 else 
 	platform = "GPGS" -- for testing purposes onlu-- gameCenter or GPGS
-end
+end 
 
 -- stores the achievementList to a json file for future use
 local store = function( )
