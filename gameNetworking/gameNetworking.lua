@@ -12,7 +12,7 @@ if onAndroid then
 	gpgs = require( "plugin.gpgs" )
 	gpgs.userInitiated = false
 elseif oniOS then
-	platform = "gameCenter"
+	platform = "gameCenter" 
 	gameCenter = require( "gameNetwork" )
 else 
 	platform = "GPGS" -- for testing purposes onlu-- gameCenter or GPGS
