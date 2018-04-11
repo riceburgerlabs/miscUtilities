@@ -21,7 +21,7 @@ end
 -- stores the achievementList to a json file for future use
 local store = function( )
 	table.save( achievementList, "achievements.json" )
-end 
+end  
 
 local sortedAchievements = {}
 
