@@ -308,7 +308,7 @@ Shows all achievements.
 Checks score values of score based achievements, submits achievement if required..
 
 ### Syntax
-`checkScoreAchievement( score )`
+`checkScoreAchievement( score, orderLargerIsBetter )`
 
 ### Parameter Reference
 
@@ -316,6 +316,7 @@ Checks score values of score based achievements, submits achievement if required
 
 **score (required)** - *number* - the score that needs to be checked against achievement list
 
+**orderLargerIsBetter (optional)** - *boolean* - if `true` (default) then it will unlock achievements for scores that are lower than the `score` parameter, if `false` then higher scores will be unlocked.,
 </details>
 
 ## Built With
